@@ -12,6 +12,7 @@ const NAV = [
   { label: "서술형", href: "/practice/descriptive", match: "/practice/descriptive" },
   { label: "모의1", href: "/practice/mock-01", match: "/practice/mock-01" },
   { label: "모의2", href: "/practice/mock-02", match: "/practice/mock-02" },
+  { label: "모의3", href: "/practice/mock-03", match: "/practice/mock-03" },
   { label: "오답", href: "/review/wrong-notes", match: "/review/wrong-notes" },
   { label: "기록", href: "/stats/study-record", match: "/stats/study-record" },
 ];

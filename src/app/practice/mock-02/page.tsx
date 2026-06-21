@@ -23,6 +23,7 @@ export default function Mock02Page() {
       <PracticeList data={ML_MOCK_02 as any[]} pageKey="mock-02" showToolbar={false} />
       <div className="btn-row" style={{ marginTop: 20 }}>
         <Link className="btn" href="/practice/mock-01">← 모의고사 1회</Link>
+        <Link className="btn" href="/practice/mock-03">모의고사 3회 →</Link>
         <Link className="btn btn--ghost" href="/review/wrong-notes">오답노트로 복습</Link>
       </div>
     </div>

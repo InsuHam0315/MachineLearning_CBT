@@ -6,6 +6,7 @@ import { ML_EXAMPLES } from "@/data/ml_examples";
 import { ML_PRACTICE } from "@/data/ml_practice";
 import { ML_MOCK_01 } from "@/data/ml_mock_01";
 import { ML_MOCK_02 } from "@/data/ml_mock_02";
+import { ML_MOCK_03 } from "@/data/ml_mock_03";
 import { ML_COVERAGE } from "@/data/lecture_coverage";
 
 const QUICK = [
@@ -15,6 +16,7 @@ const QUICK = [
   { href: "/practice/descriptive", ico: "✍️", title: "서술형 연습", desc: "정의·비교·답안 구조 템플릿" },
   { href: "/practice/mock-01", ico: "📝", title: "모의고사 1회", desc: "계산+서술+의사코드 10문항" },
   { href: "/practice/mock-02", ico: "📋", title: "모의고사 2회", desc: "행렬·정보이득·군집 10문항" },
+  { href: "/practice/mock-03", ico: "🎓", title: "모의고사 3회", desc: "기출 기반 예상 문항" },
   { href: "/review/wrong-notes", ico: "🗒️", title: "오답노트", desc: "틀린 문제 모아 복습" },
   { href: "/stats/study-record", ico: "📊", title: "학습기록", desc: "자가점검·약점 토픽 분석" },
 ];
@@ -29,7 +31,7 @@ export default function Home() {
   const counts = {
     content: ML_NOTES.length + ML_FORMULAS.length + ML_EXAMPLES.length,
     practice: ML_PRACTICE.length,
-    mock: ML_MOCK_01.length + ML_MOCK_02.length,
+    mock: ML_MOCK_01.length + ML_MOCK_02.length + ML_MOCK_03.length,
   };
   return (
     <div className="container">

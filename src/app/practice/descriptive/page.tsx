@@ -1,5 +1,6 @@
 import PracticeList from "@/components/PracticeList";
 import { ML_PRACTICE } from "@/data/ml_practice";
+import { ML_PRACTICE_EXTRA } from "@/data/ml_practice_extra";
 
 export const metadata = { title: "서술형 연습 | 머신러닝 기말 대비" };
 
@@ -15,7 +16,7 @@ export default function DescriptivePage() {
         <div className="co-head">💡 서술형 답안 4단 구조</div>
         <p><b>① 핵심 정의</b> 무엇인지 한 문장으로 → <b>② 비교 기준</b> 어떤 축으로 나누는지 → <b>③ 예시</b> 구체 사례 → <b>④ 결론 문장</b> 정리 한 줄</p>
       </div>
-      <PracticeList data={ML_PRACTICE as any[]} pageKey="descriptive" filterTypes={["서술형", "비교형", "공식해석", "알고리즘절차", "의사코드", "단답정의"]} />
+      <PracticeList data={[...ML_PRACTICE, ...ML_PRACTICE_EXTRA] as any[]} pageKey="descriptive" filterTypes={["서술형", "비교형", "공식해석", "알고리즘절차", "의사코드", "단답정의"]} />
     </div>
   );
 }
