@@ -59,7 +59,7 @@ export default function RecordsView() {
 
       <div className="grid grid--2" style={{ marginBottom: 18 }}>
         <div className="card">
-          <div className="field-label">🎯 약점 토픽 Top</div>
+          <div className="field-label">약점 토픽 Top</div>
           {!s.weakTopics.length ? <p className="muted">데이터가 쌓이면 약점 토픽이 표시됩니다.</p> : (
             <table className="data-table"><thead><tr><th>토픽</th><th>틀림</th><th>애매</th><th>강도</th></tr></thead>
               <tbody>{s.weakTopics.map((t: any) => <tr key={t.topic}><td>{t.topic}</td><td>{t.bad || 0}</td><td>{t.meh || 0}</td><td><span className="badge badge--red">{t.score}</span></td></tr>)}</tbody>
@@ -67,7 +67,7 @@ export default function RecordsView() {
           )}
         </div>
         <div className="card">
-          <div className="field-label">🔁 자주 틀리는 유형</div>
+          <div className="field-label">자주 틀리는 유형</div>
           {!s.weakTypes.length ? <p className="muted">데이터가 쌓이면 유형별 약점이 표시됩니다.</p> : (
             <table className="data-table"><thead><tr><th>유형</th><th>틀림</th><th>애매</th><th>강도</th></tr></thead>
               <tbody>{s.weakTypes.map((t: any) => <tr key={t.type}><td>{t.type}</td><td>{t.bad || 0}</td><td>{t.meh || 0}</td><td><span className="badge">{t.score}</span></td></tr>)}</tbody>
@@ -77,7 +77,7 @@ export default function RecordsView() {
       </div>
 
       <div className="card" style={{ marginBottom: 18 }}>
-        <div className="field-label">🕘 최근 학습 기록</div>
+        <div className="field-label">최근 학습 기록</div>
         {!s.recent.length ? <p className="muted">최근 기록이 없습니다.</p> : (
           <table className="data-table"><thead><tr><th>시각</th><th>토픽</th><th>유형</th><th>결과</th></tr></thead>
             <tbody>{s.recent.map((e: any, i: number) => <tr key={i}><td className="muted">{fmt(e.ts)}</td><td>{e.topic || "-"}</td><td>{e.type || "-"}</td><td><span className={"badge badge--" + (SC_VAR[e.sc] || "blue")}>{SC_LABEL[e.sc] || e.sc}</span></td></tr>)}</tbody>

@@ -1,25 +1,32 @@
-import NotesView from "@/components/NotesView";
-import { asset } from "@/lib/config";
-import { ML_NOTES } from "@/data/ml_notes";
-import { ML_FORMULAS } from "@/data/ml_formulas";
-import { ML_EXAMPLES } from "@/data/ml_examples";
+import Link from "next/link";
 import { ML_COVERAGE } from "@/data/lecture_coverage";
+import { ML_NOTES } from "@/data/ml_notes";
 
-export const metadata = { title: "개념노트 · 공식노트 · 예제 | 머신러닝 기말 대비" };
+export const metadata = { title: "개념 정리 | 머신러닝 기말 대비" };
 
-export default function NotesPage() {
+export default function NotesIndex() {
+  const chapters = ML_COVERAGE as any[];
+  const notes = ML_NOTES as any[];
+  const countFor = (id: string) => notes.filter((n) => n.chapterId === id).length;
   return (
     <div className="container">
       <section style={{ padding: "28px 0 8px" }}>
-        <span className="eyebrow">📘 학습 노트</span>
-        <h1 style={{ fontSize: "1.8rem", margin: "8px 0 6px" }}>개념노트 · 공식노트 · 계산 예제</h1>
-        <p className="muted">처음 배우는 학생도 이 노트만으로 이해할 수 있도록 개념을 처음부터 풀어 설명합니다. 수식은 KaTeX로 조판됩니다. 각 노트를 눌러 펼치세요.</p>
-        <figure className="card" style={{ margin: "14px 0 0", textAlign: "center" }}>
-          <img src={asset("/assets/img/ml-overview.svg")} alt="머신러닝 전체 개요 개념도" loading="lazy" style={{ width: "100%", maxWidth: 640, borderRadius: 12, background: "#0a1322" }} />
-          <figcaption className="muted" style={{ fontSize: ".82rem", marginTop: 8 }}>머신러닝 한눈에 보기 — 지도/비지도, 분류/회귀/군집</figcaption>
-        </figure>
+        <div className="page-kicker">개념 정리</div>
+        <h1 style={{ fontSize: "2rem", margin: "6px 0 8px" }}>강의 챕터</h1>
+        <p className="muted">챕터를 선택해 개념 정리 · 공식 · 계산 예제를 읽어보세요. 7개 강의(지도학습 개요 ~ 모델 평가).</p>
       </section>
-      <NotesView notes={ML_NOTES as any[]} formulas={ML_FORMULAS as any[]} examples={ML_EXAMPLES as any[]} chapters={ML_COVERAGE as any[]} />
+      <div style={{ marginTop: 8 }}>
+        {chapters.map((c) => (
+          <Link key={c.id} className="chapter-row" href={"/notes/" + c.id}>
+            <span className="cr-num">{c.id.replace("lecture-", "")}</span>
+            <span className="cr-body">
+              <span className="cr-title">{c.title}</span>
+              <span className="cr-desc">{(c.majorTopics || []).slice(0, 3).join(" · ")}</span>
+            </span>
+            <span className="cr-go"><span className="badge">개념노트 {countFor(c.id)}개 →</span></span>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

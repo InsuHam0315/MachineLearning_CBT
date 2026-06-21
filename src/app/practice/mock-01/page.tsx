@@ -8,12 +8,12 @@ export default function Mock01Page() {
   return (
     <div className="container">
       <section style={{ padding: "28px 0 8px" }}>
-        <span className="eyebrow">📝 모의고사 1회</span>
+        <span className="eyebrow">모의고사 1회</span>
         <h1 style={{ fontSize: "1.8rem", margin: "8px 0 6px" }}>기말 모의고사 — 1회</h1>
         <p className="muted">교수님 출제 스타일에 맞춘 서술형·계산형 10문항입니다. 실제 시험처럼 답안을 먼저 작성한 뒤 모범답안·채점 기준으로 스스로 채점하세요.</p>
       </section>
       <div className="card" style={{ marginBottom: 18 }}>
-        <div className="field-label">📋 구성</div>
+        <div className="field-label">구성</div>
         <div className="tag-row">
           <span className="badge">계산형 3</span><span className="badge badge--green">서술형 3</span>
           <span className="badge">공식해석 2</span><span className="badge">의사코드 1</span>

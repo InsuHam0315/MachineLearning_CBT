@@ -1,44 +1,64 @@
 import Link from "next/link";
-import { HomeHero, HomeSummary } from "@/components/HomeDashboard";
-import { ML_NOTES } from "@/data/ml_notes";
-import { ML_FORMULAS } from "@/data/ml_formulas";
-import { ML_EXAMPLES } from "@/data/ml_examples";
-import { ML_PRACTICE } from "@/data/ml_practice";
-import { ML_MOCK_01 } from "@/data/ml_mock_01";
-import { ML_MOCK_02 } from "@/data/ml_mock_02";
-import { ML_MOCK_03 } from "@/data/ml_mock_03";
+import { HomeSummary } from "@/components/HomeDashboard";
 import { ML_COVERAGE } from "@/data/lecture_coverage";
 
+// 시험 정보 — 실제 일정이 정해지면 이 값만 바꾸면 됩니다.
+const EXAM = {
+  date: "미정 — 직접 입력",
+  place: "미정 — 직접 입력",
+  range: "지도학습 개요 ~ 모델 평가 (1–7강)",
+};
+
 const QUICK = [
-  { href: "/notes", ico: "📘", title: "개념노트", desc: "7개 강의 깊이 있는 한국어 설명" },
-  { href: "/notes#sec-formulas", ico: "∑", title: "공식노트", desc: "KaTeX 수식 · 기호·의미·예" },
-  { href: "/practice/calculation", ico: "🧮", title: "계산형 연습", desc: "행렬·거리·확률·지표 계산 풀이" },
-  { href: "/practice/descriptive", ico: "✍️", title: "서술형 연습", desc: "정의·비교·답안 구조 템플릿" },
-  { href: "/practice/mock-01", ico: "📝", title: "모의고사 1회", desc: "계산+서술+의사코드 10문항" },
-  { href: "/practice/mock-02", ico: "📋", title: "모의고사 2회", desc: "행렬·정보이득·군집 10문항" },
-  { href: "/practice/mock-03", ico: "🎓", title: "모의고사 3회", desc: "기출 기반 예상 문항" },
-  { href: "/review/wrong-notes", ico: "🗒️", title: "오답노트", desc: "틀린 문제 모아 복습" },
-  { href: "/stats/study-record", ico: "📊", title: "학습기록", desc: "자가점검·약점 토픽 분석" },
-];
-const FLOW = [
-  ["1. 이해", "개념노트로 각 강의의 원리를 이해"], ["2. 정리", "공식노트로 핵심 식과 기호 암기"],
-  ["3. 적용", "계산 예제·계산형 연습으로 손에 익히기"], ["4. 표현", "서술형 연습으로 답안 구조 만들기"],
-  ["5. 실전", "모의고사 1·2회로 시간 안에 풀기"], ["6. 복습", "오답노트로 틀린 문제 다시 풀기"],
-  ["7. 점검", "학습기록으로 약점 토픽 확인"], ["8. 반복", "약점 위주로 2~7 반복"],
+  { href: "/practice/calculation", ico: "CALC", title: "계산형 연습", desc: "행렬·확률·정보이득·지표 계산" },
+  { href: "/practice/descriptive", ico: "DESC", title: "서술형 연습", desc: "정의·비교·답안 구조" },
+  { href: "/practice/mock-01", ico: "MOCK 1", title: "모의고사 1회", desc: "계산+서술 10문항" },
+  { href: "/practice/mock-02", ico: "MOCK 2", title: "모의고사 2회", desc: "행렬·정보이득 10문항" },
+  { href: "/practice/mock-03", ico: "MOCK 3", title: "모의고사 3회", desc: "기출 기반 예상 12문항" },
+  { href: "/review/wrong-notes", ico: "WRONG", title: "오답노트", desc: "틀린 문제 모아 복습" },
+  { href: "/stats/study-record", ico: "STATS", title: "학습기록", desc: "자가점검·약점 분석" },
 ];
 
 export default function Home() {
-  const counts = {
-    content: ML_NOTES.length + ML_FORMULAS.length + ML_EXAMPLES.length,
-    practice: ML_PRACTICE.length,
-    mock: ML_MOCK_01.length + ML_MOCK_02.length + ML_MOCK_03.length,
-  };
+  const chapters = ML_COVERAGE as any[];
   return (
     <div className="container">
-      <HomeHero counts={counts} />
+      <section className="hero">
+        <span className="eyebrow">머신러닝 기말 대비</span>
+        <h1>데이터로 배우는 머신러닝<br /><span className="grad-text">· 기말 대비</span></h1>
+        <p className="lead">지도학습의 개요부터 모델 평가까지 — 깊이 있는 개념 정리와 단답·서답형·계산형 문제로 준비합니다.</p>
+
+        <div className="exam-card">
+          <div className="exam-item"><div className="k">일시</div><div className="v">{EXAM.date}</div></div>
+          <div className="exam-item"><div className="k">장소</div><div className="v">{EXAM.place}</div></div>
+          <div className="exam-item"><div className="k">범위</div><div className="v">{EXAM.range}</div></div>
+        </div>
+
+        <div className="btn-row">
+          <Link className="btn btn--primary" href="/practice/calculation">문제 풀기</Link>
+          <Link className="btn" href="/review/wrong-notes">오답 노트</Link>
+          <Link className="btn btn--ghost" href="/notes">개념 정리</Link>
+        </div>
+      </section>
 
       <section className="section">
-        <h2 style={{ marginBottom: 16 }}>바로가기</h2>
+        <h2 style={{ fontSize: "1.3rem", marginBottom: 14 }}>강의 챕터</h2>
+        <div>
+          {chapters.map((c) => (
+            <Link key={c.id} className="chapter-row" href={"/notes/" + c.id}>
+              <span className="cr-num">{c.id.replace("lecture-", "")}</span>
+              <span className="cr-body">
+                <span className="cr-title">{c.title}</span>
+                <span className="cr-desc">{(c.majorTopics || []).slice(0, 3).join(" · ")}</span>
+              </span>
+              <span className="cr-go"><span className="btn btn--sm">개념 정리 →</span></span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <h2 style={{ fontSize: "1.3rem", marginBottom: 14 }}>연습 &amp; 기록</h2>
         <div className="grid grid--4">
           {QUICK.map((q) => (
             <Link className="quick-card" href={q.href} key={q.title}>
@@ -51,33 +71,8 @@ export default function Home() {
       </section>
 
       <section className="section">
-        <h2 style={{ marginBottom: 16 }}>내 학습 현황</h2>
+        <h2 style={{ fontSize: "1.3rem", marginBottom: 14 }}>내 학습 현황</h2>
         <HomeSummary />
-      </section>
-
-      <section className="section">
-        <div className="card">
-          <div className="field-label">🧭 추천 학습 흐름</div>
-          <div className="grid grid--4" style={{ marginTop: 8 }}>
-            {FLOW.map(([t, d]) => <div className="panel" key={t}><b>{t}</b><p className="muted" style={{ margin: "6px 0 0" }}>{d}</p></div>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <h2 style={{ marginBottom: 16 }}>강의 챕터</h2>
-        <div className="grid grid--auto">
-          {(ML_COVERAGE as any[]).map((c) => (
-            <Link className="card quick-card" href={"/notes#sec-" + c.id} key={c.id}>
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <span className="ch-num" style={{ width: 34, height: 34, fontSize: ".95rem" }}>{c.id.replace("lecture-", "")}</span>
-                <span className="qc-title" style={{ fontSize: ".98rem" }}>{c.title}</span>
-              </div>
-              <div className="tag-row" style={{ marginTop: 8 }}>{(c.majorTopics || []).slice(0, 3).map((t: string) => <span className="badge badge--blue" key={t}>{t}</span>)}</div>
-              <span className="qc-desc">슬라이드 {c.slideCount || "-"}쪽 · 노트로 보기 →</span>
-            </Link>
-          ))}
-        </div>
       </section>
     </div>
   );

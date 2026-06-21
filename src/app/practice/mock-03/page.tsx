@@ -8,12 +8,12 @@ export default function Mock03Page() {
   return (
     <div className="container">
       <section style={{ padding: "28px 0 8px" }}>
-        <span className="eyebrow">🎓 모의고사 3회 · 기출 기반</span>
+        <span className="eyebrow">모의고사 3회 · 기출 기반</span>
         <h1 style={{ fontSize: "1.8rem", margin: "8px 0 6px" }}>기말 모의고사 — 3회 (기출 스타일)</h1>
         <p className="muted">2025 기말·2026 중간 기출을 분석해 교수님 실제 출제 스타일(계산·서술·의사코드)로 만든 예상 문항입니다. 출제 범위는 7개 강의(지도학습 개요 ~ 모델 평가)로 한정했습니다.</p>
       </section>
       <div className="card" style={{ marginBottom: 18 }}>
-        <div className="field-label">📋 구성 (기출 분석 반영)</div>
+        <div className="field-label">구성 (기출 분석 반영)</div>
         <div className="tag-row">
           <span className="badge">계산형·지표계산 9</span><span className="badge badge--green">서술형 1</span>
           <span className="badge">공식해석 1</span><span className="badge">의사코드 1</span>

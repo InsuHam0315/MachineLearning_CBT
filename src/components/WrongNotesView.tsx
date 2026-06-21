@@ -40,14 +40,14 @@ export default function WrongNotesView() {
   return (
     <>
       <section style={{ padding: "28px 0 8px" }}>
-        <span className="eyebrow">🗒️ 오답노트</span>
+        <span className="eyebrow">오답노트</span>
         <h1 style={{ fontSize: "1.8rem", margin: "8px 0 6px" }}>오답노트 · 약점 복습 <span className="badge badge--amber">{list.length}</span></h1>
         <p className="muted">연습·모의고사에서 <b>오답노트에 저장</b>을 누르거나 <b>틀림</b>으로 점검한 문제가 모입니다.</p>
       </section>
 
       {list.length ? (
         <div className="toolbar">
-          <input className="search-input" placeholder="🔍 오답 검색" value={q} onChange={(e) => setQ(e.target.value)} />
+          <input className="search-input" placeholder="오답 검색" value={q} onChange={(e) => setQ(e.target.value)} />
           <select className="select" value={topic} onChange={(e) => setTopic(e.target.value)}><option value="">토픽 전체</option>{topics.map((t) => <option key={t}>{t}</option>)}</select>
           <select className="select" value={type} onChange={(e) => setType(e.target.value)}><option value="">유형 전체</option>{types.map((t) => <option key={t}>{t}</option>)}</select>
           <button className="btn btn--ghost btn--sm" style={{ marginLeft: "auto" }} onClick={clearAll}>전체 비우기</button>
@@ -55,7 +55,7 @@ export default function WrongNotesView() {
       ) : null}
 
       {!list.length ? (
-        <div className="empty-state"><div className="es-ico">🗒️</div>
+        <div className="empty-state"><div className="es-ico"></div>
           <p>저장된 오답이 없습니다.<br />연습·모의고사에서 “오답노트에 저장”을 누르거나 “틀림”으로 점검하면 자동으로 모입니다.</p>
           <div className="btn-row" style={{ justifyContent: "center", marginTop: 14 }}>
             <Link className="btn btn--primary" href="/practice/calculation">계산형 연습 시작</Link>
@@ -63,7 +63,7 @@ export default function WrongNotesView() {
           </div>
         </div>
       ) : !visible.length ? (
-        <div className="empty-state"><div className="es-ico">🔍</div><p>조건에 맞는 오답이 없습니다.</p></div>
+        <div className="empty-state"><div className="es-ico"></div><p>조건에 맞는 오답이 없습니다.</p></div>
       ) : (
         visible.map((w) => {
           const retry = PAGE_URL[w.page] ? PAGE_URL[w.page] + "#prob-" + w.id : "";
@@ -84,20 +84,20 @@ export default function WrongNotesView() {
                   : <div className="callout callout--warn"><p>작성한 답안이 없습니다. 다시 풀어보며 답안을 작성해 보세요.</p></div>}
 
                 <details className="reveal reveal--answer" style={{ marginTop: 12 }}>
-                  <summary className="reveal-head" style={{ cursor: "pointer" }}>✓ 모범답안 보기</summary>
+                  <summary className="reveal-head" style={{ cursor: "pointer" }}>모범답안 보기</summary>
                   <div className="reveal-body">
                     {w.answerStructure && w.answerStructure.length ? <div className="answer-template">{w.answerStructure.map((s: string, i: number) => <div className="at-step" key={i}><b>{s}</b></div>)}</div> : null}
                     <Prose value={w.modelAnswer} />
                   </div>
                 </details>
                 <details className="reveal reveal--steps" style={{ marginTop: 10 }}>
-                  <summary className="reveal-head" style={{ cursor: "pointer" }}>↳ 풀이 과정 보기</summary>
+                  <summary className="reveal-head" style={{ cursor: "pointer" }}>풀이 과정 보기</summary>
                   <div className="reveal-body"><Steps items={w.solutionSteps} />
-                    {w.commonMistakes && w.commonMistakes.length ? <div className="callout callout--warn" style={{ marginTop: 10 }}><div className="co-head">⚠ 자주 하는 실수</div><ProseList items={w.commonMistakes} /></div> : null}
+                    {w.commonMistakes && w.commonMistakes.length ? <div className="callout callout--warn" style={{ marginTop: 10 }}><div className="co-head">자주 하는 실수</div><ProseList items={w.commonMistakes} /></div> : null}
                   </div>
                 </details>
                 <details className="reveal reveal--rubric" style={{ marginTop: 10 }}>
-                  <summary className="reveal-head" style={{ cursor: "pointer" }}>⚖ 채점 기준 보기</summary>
+                  <summary className="reveal-head" style={{ cursor: "pointer" }}>채점 기준 보기</summary>
                   <div className="reveal-body"><Rubric items={w.scoringRubric} /></div>
                 </details>
 

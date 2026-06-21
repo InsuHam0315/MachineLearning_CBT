@@ -82,7 +82,7 @@ function ProblemCard({ p, idx, pageKey, onChange }: { p: any; idx: number; pageK
         <div className="prob-statement"><Prose value={p.problem} /></div>
 
         {p.answerFormat ? (
-          <div className="callout"><div className="co-head">📝 답안 형식</div><Prose value={p.answerFormat} /></div>
+          <div className="callout"><div className="co-head">답안 형식</div><Prose value={p.answerFormat} /></div>
         ) : null}
         {p.keyFormula ? (<><div className="field-mini-label">핵심 공식</div><FormulaBlock value={p.keyFormula} /></>) : null}
 
@@ -103,7 +103,7 @@ function ProblemCard({ p, idx, pageKey, onChange }: { p: any; idx: number; pageK
 
         {reveal.answer ? (
           <div className="reveal reveal--answer">
-            <div className="reveal-head">✓ 모범답안</div>
+            <div className="reveal-head">모범답안</div>
             <div className="reveal-body">
               {isDescriptive && p.answerStructure && p.answerStructure.length ? (
                 <div className="answer-template">
@@ -118,12 +118,12 @@ function ProblemCard({ p, idx, pageKey, onChange }: { p: any; idx: number; pageK
 
         {reveal.steps ? (
           <div className="reveal reveal--steps">
-            <div className="reveal-head">↳ 풀이 과정</div>
+            <div className="reveal-head">풀이 과정</div>
             <div className="reveal-body">
               <Steps items={p.solutionSteps} />
               {p.commonMistakes && p.commonMistakes.length ? (
                 <div className="callout callout--warn" style={{ marginTop: 12 }}>
-                  <div className="co-head">⚠ 자주 하는 실수</div><ProseList items={p.commonMistakes} />
+                  <div className="co-head">자주 하는 실수</div><ProseList items={p.commonMistakes} />
                 </div>
               ) : null}
             </div>
@@ -132,7 +132,7 @@ function ProblemCard({ p, idx, pageKey, onChange }: { p: any; idx: number; pageK
 
         {reveal.rubric ? (
           <div className="reveal reveal--rubric">
-            <div className="reveal-head">⚖ 채점 기준</div>
+            <div className="reveal-head">채점 기준</div>
             <div className="reveal-body"><Rubric items={p.scoringRubric} /></div>
           </div>
         ) : null}
@@ -196,7 +196,7 @@ export default function PracticeList({ data, pageKey, filterTypes, showToolbar =
       {showToolbar ? (
         <>
           <div className="toolbar">
-            <input className="search-input" placeholder="🔍 문제·토픽·태그 검색" value={q} onChange={(e) => setQ(e.target.value)} />
+            <input className="search-input" placeholder="문제·토픽·태그 검색" value={q} onChange={(e) => setQ(e.target.value)} />
             <select className="select" value={type} onChange={(e) => setType(e.target.value)}>
               <option value="">유형 전체</option>
               {types.map((t) => <option key={t} value={t}>{t}</option>)}
@@ -215,7 +215,7 @@ export default function PracticeList({ data, pageKey, filterTypes, showToolbar =
       {visible.length ? (
         visible.map((p) => <ProblemCard key={p.id} p={p} idx={base.indexOf(p)} pageKey={pageKey} onChange={() => setTick((t) => t + 1)} />)
       ) : (
-        <div className="empty-state"><div className="es-ico">🔍</div><p>조건에 맞는 문제가 없습니다.</p></div>
+        <div className="empty-state"><div className="es-ico"></div><p>조건에 맞는 문제가 없습니다.</p></div>
       )}
     </div>
   );
