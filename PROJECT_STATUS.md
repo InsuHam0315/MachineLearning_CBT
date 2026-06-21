@@ -1,64 +1,31 @@
-# PROJECT STATUS — 머신러닝 기말고사 서술형·계산형 대비 사이트
+# PROJECT STATUS — Next.js 마이그레이션 (branch: nextjs)
 
-> 작업 재개(resume)용 단일 진실 소스. 중단 후 "작업 이어서 해줘"라고 하면 이 파일을 먼저 읽고 기존 파일을 점검한 뒤 마지막 완료 지점부터 이어서 진행한다.
+> 이 브랜치는 기존 정적 사이트(main 브랜치)를 **Next.js(App Router) + 정적 export + KaTeX 수식**으로 재구축한 버전이다.
 
-## 현재 단계 — 빌드 완료, 검증 통과 (커밋/푸시 단계)
-- [x] 1. 프로젝트 루트 점검
-- [x] 2. 강의자료(`시험/`) 7개 PPTX 추출·분석 (`_extract/`, gitignore됨)
-- [x] 3. SoftwareEngineering_CBT 디자인/구조 방향 반영(다크 대시보드 + 우측 TOC + 로컬 로그인/기록/오답노트)
-- [x] 4. `.gitignore`, `.nojekyll`, `PROJECT_STATUS.md`
-- [x] 5. 데이터 파일 7종 생성 (병렬 에이전트로 작성)
-- [x] 6. 디자인 시스템 CSS (assets/css/style.css)
-- [x] 7. JS 모듈 6종 (common/auth/practice/notes/wrongNotes/records)
-- [x] 8. SVG 다이어그램 8종
-- [x] 9. HTML 페이지 9종
-- [x] 10. 검증 스크립트 2종 + 실행 + 통과
-- [x] 11. git init / commit / push 완료 (origin/main)
-- [x] 12. 한국어 최종 보고
+## 완료 상태
+- [x] Next.js 14 App Router 프로젝트 구성 (`output: 'export'`, basePath=/MachineLearning_CBT, trailingSlash, images.unoptimized)
+- [x] 기존 데이터(window.ML_*) → `src/data/*.ts` 모듈로 변환 (내용 동일: 노트 20·공식 34·예제 16·연습 28·모의 20)
+- [x] 디자인 CSS 이식(`src/styles/globals.css`) + KaTeX 다크 보정(`src/styles/math.css`)
+- [x] **KaTeX 수식**: `src/lib/mathify.ts`(유니코드→LaTeX) — 실제 식 144개 전부 변환·렌더 검증(KaTeX 실패 0)
+- [x] 컴포넌트: SiteHeader/Footer, NotesView, PracticeList(풀이엔진), WrongNotesView, RecordsView, LoginForm, HomeDashboard, ui(수식/표/채점)
+- [x] 라우트 9개: /, /login, /notes, /practice/{calculation,descriptive,mock-01,mock-02}, /review/wrong-notes, /stats/study-record
+- [x] `.github/workflows/deploy.yml` (Actions로 Pages 배포)
+- [x] `npm run build` 성공 → `out/` 정적 export 생성 (12 페이지 prerender)
+- [x] 검증: KaTeX가 정적 HTML에 baked, basePath 적용, KaTeX 폰트 20개·SVG 8개·.nojekyll 모두 out/에 포함
+- [x] 구 정적 파일 제거(이 브랜치) — main 브랜치에는 그대로 보존
 
-## 강의 파일 점검 (7/7 추출·반영 완료)
-| ID | 파일 | 슬라이드 | 반영 |
-|----|------|---------|------|
-| lecture-01 | 1.지도학습 개요.pptx | 62 | 노트·공식·예제·연습·모의 |
-| lecture-02 | 2.선형회귀.pptx | 49 | 노트·공식·예제·연습·모의 |
-| lecture-03 | 3.로지스틱 회귀.pptx | 63 | 노트·공식·예제·연습·모의 |
-| lecture-04 | 4.Support Vector Machines (SVM).pptx | 35 | 노트·공식·예제·연습·모의 |
-| lecture-05 | 5.Decision Tree.pptx | 36 | 노트·공식·예제·연습·모의 |
-| lecture-06 | 6.Naive Bayes Classifier.pptx | 45 | 노트·공식·예제·연습·모의 |
-| lecture-07 | 7.모델 평가.pptx | 16 | 노트·공식·예제·연습·모의 |
+## 빌드/실행
+- 개발: `npm install` → `npm run dev` (localhost:3000)
+- 빌드: `npm run build` → `out/`
 
-## 생성 데이터 파일 (검증됨)
-- [x] data/lecture_coverage.js — 7개 강의 커버리지
-- [x] data/ml_notes.js — 개념노트 20개
-- [x] data/ml_formulas.js — 공식노트 34개
-- [x] data/ml_examples.js — 계산 예제 16개
-- [x] data/ml_practice.js — 연습문제 28개(10개 유형 전부)
-- [x] data/ml_mock_01.js — 모의고사 1회 10문항
-- [x] data/ml_mock_02.js — 모의고사 2회 10문항
+## 배포(go-live)
+1. nextjs → main 병합(또는 main으로 푸시)
+2. Settings → Pages → Source: **GitHub Actions**
+3. main 푸시 시 워크플로우가 빌드·배포 → https://insuham0315.github.io/MachineLearning_CBT/
 
-## 완료 페이지
-- [x] index.html / login.html
-- [x] notes/index.html
-- [x] practice/calculation.html · descriptive.html · mock-01.html · mock-02.html
-- [x] review/wrong-notes.html
-- [x] stats/study-record.html
-
-## 검증 결과
-- validate_content.py: 통과 8 · 경고 0 · 실패 0 (EXIT 0)
-- validate_site.py: 통과 10 · 경고 0 · 실패 0 (EXIT 0)
-- node --check (전 JS): 전부 OK
-- Node 런타임 스모크(_extract/smoke.js): 전 데이터 렌더 throw 0건
-- 로컬 HTTP 서빙: 주요 9개 URL 모두 200
-
-## Git 상태 — 푸시 완료
-- repo: 초기화됨, branch=main, origin/main 동기화됨, 작업트리 clean
-- remote: origin = https://github.com/InsuHam0315/MachineLearning_CBT.git
-- 시험/ 원본: 커밋 안 됨(.gitignore) — 확인 완료
-- push: **완료**. 일회성 PAT(InsuHam0315)로 `main -> main` 푸시 성공. 사용한 토큰은 폐기(Revoke) 권장.
-
-## 다음 동작 (Resume) — 배포 설정만 남음
-GitHub → Settings → Pages → Source: Deploy from a branch → Branch: main / Folder: /(root) → Save
-→ https://insuham0315.github.io/MachineLearning_CBT/
+## Git
+- branch: nextjs (main에서 분기). 구 정적 사이트는 main 유지.
+- push: 토큰/권한 필요(InsuHam0315).
 
 ## 안전
-- `시험/` 원본은 수정/삭제/이동/커밋하지 않음. `_extract/`(분석 임시물)도 gitignore.
+- `시험/` 원본 강의자료 수정/커밋 없음(.gitignore). `_extract/`도 gitignore.

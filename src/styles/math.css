@@ -1,0 +1,27 @@
+/* =========================================================================
+   math.css — KaTeX(진짜 수학 공식 폰트) 다크테마 보정 + 공식 블록 스타일
+   (katex.min.css 는 layout.tsx 에서 import)
+   ========================================================================= */
+
+/* KaTeX 본문은 currentColor를 따라가므로 박스 색을 그대로 사용 */
+.katex { font-size: 1.06em; line-height: 1.4; }
+.katex-display { margin: 0.2em 0; overflow-x: auto; overflow-y: hidden; }
+
+/* 공식 블록 안의 KaTeX */
+.formula-block .katex,
+.formula-block .katex-display { color: #d7f6ff; }
+.formula-block { font-family: inherit; } /* 모노스페이스 강제 해제 → KaTeX 폰트 사용 */
+
+/* 인라인 수식 */
+.math-inline { display: inline-block; vertical-align: middle; }
+
+/* 변환 실패 시 폴백: 수학 세리프 폰트로라도 '식'처럼 보이게 */
+.math-fallback {
+  font-family: "STIX Two Math", "Cambria Math", "Latin Modern Math", "Noto Serif KR", Georgia, serif;
+  font-style: italic;
+  font-size: 1.08em;
+  letter-spacing: .2px;
+}
+
+/* 공식 카드/핵심공식에서 줄바꿈 보존 + 여러 식 정렬 */
+.formula-block .katex-display + .katex-display { margin-top: .35em; }
