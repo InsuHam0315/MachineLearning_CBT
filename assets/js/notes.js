@@ -12,6 +12,17 @@
     return '<div class="field"><span class="field-label"' + (color ? ' style="color:' + color + '"' : "") + ">" + ML.esc(label) + "</span>" + inner + "</div>";
   }
 
+  // 챕터별 대표 다이어그램 (노트 데이터의 visual이 비어 있어도 섹션 상단에 표시)
+  var CH_SVG = {
+    "lecture-01": "../assets/img/supervised-learning.svg",
+    "lecture-02": "../assets/img/linear-regression.svg",
+    "lecture-03": "../assets/img/logistic-regression.svg",
+    "lecture-04": "../assets/img/svm-margin.svg",
+    "lecture-05": "../assets/img/decision-tree.svg",
+    "lecture-06": "../assets/img/naive-bayes.svg",
+    "lecture-07": "../assets/img/model-evaluation.svg"
+  };
+
   // 연습 링크를 실제 존재하는 페이지로 정규화 (notes/ 기준 상대경로)
   function safeHref(href) {
     var s = (href || "").toLowerCase();
@@ -148,6 +159,9 @@
         var num = c.id.replace("lecture-", "");
         h += '<section id="sec-' + c.id + '" class="notes-section">';
         h += '<div class="chapter-head"><span class="ch-num">' + ML.esc(num) + '</span><h2>' + ML.esc(c.title) + "</h2></div>";
+        if (CH_SVG[c.id]) {
+          h += '<figure class="card" style="margin:0 0 16px;text-align:center"><img src="' + CH_SVG[c.id] + '" alt="' + ML.esc(c.title) + ' 개념도" loading="lazy" style="width:100%;max-width:620px;border-radius:12px;background:#0a1322"/></figure>';
+        }
         h += chNotes.map(renderNote).join("");
         h += "</section>";
       });
