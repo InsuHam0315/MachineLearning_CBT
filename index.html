@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>머신러닝 기말고사 서술형·계산형 대비</title>
+  <meta name="description" content="머신러닝 기말고사를 위한 서술형·계산형 풀이 트레이너. 개념노트·공식노트·계산예제·모의고사·오답노트·학습기록." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="home" data-base=".">
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <header class="site-header" id="app-header"></header>
+
+  <main id="main" class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <span class="eyebrow">⚡ 객관식이 아닌 서술형·계산형 풀이 트레이너</span>
+      <h1>머신러닝 기말고사<br><span class="grad-text">서술형·계산형 완전 대비</span></h1>
+      <p class="lead" id="heroLead">계산 과정과 서술형 답안을 직접 연습하고, 모범답안·풀이·채점기준으로 스스로 채점하세요. 지도학습부터 모델 평가까지 7개 강의를 깊이 있는 한국어 노트로 학습합니다.</p>
+
+      <div class="stat-row">
+        <div class="stat"><div class="num" id="statNotes">–</div><div class="lbl">개념·공식·예제</div></div>
+        <div class="stat"><div class="num" id="statPractice">–</div><div class="lbl">연습 문제</div></div>
+        <div class="stat"><div class="num" id="statMock">–</div><div class="lbl">모의고사 문항</div></div>
+        <div class="stat"><div class="num">7</div><div class="lbl">강의 챕터</div></div>
+      </div>
+
+      <div class="btn-row" style="margin-top:22px">
+        <a class="btn btn--primary" href="notes/index.html">개념노트로 시작하기 →</a>
+        <a class="btn" href="practice/calculation.html">계산형 연습</a>
+        <a class="btn btn--ghost" href="login.html" id="heroLogin">로그인</a>
+      </div>
+    </section>
+
+    <!-- QUICK LINKS -->
+    <section class="section">
+      <h2 style="margin-bottom:16px">바로가기</h2>
+      <div class="grid grid--4">
+        <a class="quick-card" href="notes/index.html"><span class="qc-ico">📘</span><span class="qc-title">개념노트</span><span class="qc-desc">7개 강의 깊이 있는 한국어 설명</span></a>
+        <a class="quick-card" href="notes/index.html#sec-formulas"><span class="qc-ico">∑</span><span class="qc-title">공식노트</span><span class="qc-desc">원래 식→기억할 식→기호→의미→예</span></a>
+        <a class="quick-card" href="practice/calculation.html"><span class="qc-ico">🧮</span><span class="qc-title">계산형 연습</span><span class="qc-desc">행렬·거리·확률·지표 계산 풀이</span></a>
+        <a class="quick-card" href="practice/descriptive.html"><span class="qc-ico">✍️</span><span class="qc-title">서술형 연습</span><span class="qc-desc">정의·비교·답안 구조 템플릿</span></a>
+        <a class="quick-card" href="practice/mock-01.html"><span class="qc-ico">📝</span><span class="qc-title">모의고사 1회</span><span class="qc-desc">계산+서술+의사코드 10문항</span></a>
+        <a class="quick-card" href="practice/mock-02.html"><span class="qc-ico">📋</span><span class="qc-title">모의고사 2회</span><span class="qc-desc">행렬·정보이득·군집 10문항</span></a>
+        <a class="quick-card" href="review/wrong-notes.html"><span class="qc-ico">🗒️</span><span class="qc-title">오답노트</span><span class="qc-desc">틀린 문제 모아 복습</span></a>
+        <a class="quick-card" href="stats/study-record.html"><span class="qc-ico">📊</span><span class="qc-title">학습기록</span><span class="qc-desc">자가점검·약점 토픽 분석</span></a>
+      </div>
+    </section>
+
+    <!-- SUMMARY -->
+    <section class="section">
+      <h2 style="margin-bottom:16px">내 학습 현황</h2>
+      <div class="grid grid--2" id="summaryRoot"></div>
+    </section>
+
+    <!-- RECOMMENDED FLOW -->
+    <section class="section">
+      <div class="card">
+        <div class="field-label" style="color:var(--cyan)">🧭 추천 학습 흐름</div>
+        <div class="grid grid--4" style="margin-top:8px">
+          <div class="panel"><b>1. 이해</b><p class="muted" style="margin:6px 0 0">개념노트로 각 강의의 원리를 이해</p></div>
+          <div class="panel"><b>2. 정리</b><p class="muted" style="margin:6px 0 0">공식노트로 핵심 식과 기호 암기</p></div>
+          <div class="panel"><b>3. 적용</b><p class="muted" style="margin:6px 0 0">계산 예제·계산형 연습으로 손에 익히기</p></div>
+          <div class="panel"><b>4. 표현</b><p class="muted" style="margin:6px 0 0">서술형 연습으로 답안 구조 만들기</p></div>
+          <div class="panel"><b>5. 실전</b><p class="muted" style="margin:6px 0 0">모의고사 1·2회로 시간 안에 풀기</p></div>
+          <div class="panel"><b>6. 복습</b><p class="muted" style="margin:6px 0 0">오답노트로 틀린 문제 다시 풀기</p></div>
+          <div class="panel"><b>7. 점검</b><p class="muted" style="margin:6px 0 0">학습기록으로 약점 토픽 확인</p></div>
+          <div class="panel"><b>8. 반복</b><p class="muted" style="margin:6px 0 0">약점 위주로 2~7 반복</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTERS -->
+    <section class="section">
+      <h2 style="margin-bottom:16px">강의 챕터</h2>
+      <div class="grid grid--auto" id="chapterRoot"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="app-footer"></footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/records.js"></script>
+  <script src="data/lecture_coverage.js"></script>
+  <script src="data/ml_notes.js"></script>
+  <script src="data/ml_formulas.js"></script>
+  <script src="data/ml_examples.js"></script>
+  <script src="data/ml_practice.js"></script>
+  <script src="data/ml_mock_01.js"></script>
+  <script src="data/ml_mock_02.js"></script>
+  <script>
+    (function () {
+      var notes = (window.ML_NOTES || []).length;
+      var formulas = (window.ML_FORMULAS || []).length;
+      var examples = (window.ML_EXAMPLES || []).length;
+      var practice = (window.ML_PRACTICE || []).length;
+      var mock = (window.ML_MOCK_01 || []).length + (window.ML_MOCK_02 || []).length;
+      function set(id, v) { var e = document.getElementById(id); if (e) e.textContent = v; }
+      set("statNotes", notes + formulas + examples);
+      set("statPractice", practice);
+      set("statMock", mock);
+
+      var u = ML.getUser();
+      if (u && u.name) {
+        var lead = document.getElementById("heroLead");
+        if (lead) lead.innerHTML = "<b>" + ML.esc(u.name) + "</b>님, 다시 오신 걸 환영합니다. 이어서 학습하세요. 계산 과정과 서술형 답안을 직접 연습하고 모범답안·풀이·채점기준으로 스스로 채점할 수 있습니다.";
+        var hl = document.getElementById("heroLogin");
+        if (hl) { hl.textContent = "학습기록 보기"; hl.setAttribute("href", "stats/study-record.html"); }
+      }
+
+      var sr = document.getElementById("summaryRoot");
+      if (sr && ML.records && ML.records.summaryCards) sr.innerHTML = ML.records.summaryCards();
+
+      // 챕터 카드
+      var cr = document.getElementById("chapterRoot");
+      if (cr && window.ML_COVERAGE) {
+        cr.innerHTML = window.ML_COVERAGE.map(function (c) {
+          var num = c.id.replace("lecture-", "");
+          var topics = (c.majorTopics || []).slice(0, 3).map(function (t) { return '<span class="badge badge--blue">' + ML.esc(t) + "</span>"; }).join("");
+          return '<a class="card quick-card" href="notes/index.html#sec-' + c.id + '">' +
+            '<div style="display:flex;align-items:center;gap:10px"><span class="ch-num" style="width:34px;height:34px;font-size:.95rem">' + num + '</span><span class="qc-title" style="font-size:.98rem">' + ML.esc(c.title) + '</span></div>' +
+            '<div class="tag-row" style="margin-top:8px">' + topics + '</div>' +
+            '<span class="qc-desc">슬라이드 ' + (c.slideCount || "-") + '쪽 · 노트로 보기 →</span></a>';
+        }).join("");
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>오답노트 | 머신러닝 기말 대비</title>
+  <meta name="description" content="틀리거나 약한 문제를 모아 모범답안·풀이·채점기준으로 복습하는 오답노트." />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body data-page="wrong" data-base="..">
+  <a class="skip-link" href="#wrongList">본문 바로가기</a>
+  <header class="site-header" id="app-header"></header>
+
+  <main class="container">
+    <section style="padding:28px 0 8px">
+      <span class="eyebrow">🗒️ 오답노트</span>
+      <h1 style="font-size:1.8rem;margin:8px 0 6px">오답노트 · 약점 복습 <span class="badge badge--amber" id="wrongCount">0</span></h1>
+      <p class="muted">연습·모의고사에서 <b>오답노트에 저장</b>을 누르거나 <b>틀림</b>으로 점검한 문제가 모입니다. 내 답안과 모범답안을 비교하며 다시 풀어 보세요.</p>
+    </section>
+
+    <div class="toolbar" id="wrongToolbar"></div>
+    <div id="wrongList" style="margin-top:8px">
+      <div class="empty-state"><div class="es-ico">⏳</div><p>불러오는 중…</p></div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="app-footer"></footer>
+
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/wrongNotes.js"></script>
+</body>
+</html>

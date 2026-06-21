@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" font-family="'Pretendard',system-ui,sans-serif">
+  <rect width="600" height="320" rx="16" fill="#0a1322"/>
+  <text x="300" y="32" fill="#e7ecf5" font-size="17" font-weight="800" text-anchor="middle">SVM: 마진을 최대화하는 결정 경계</text>
+  <!-- margins (dashed) and boundary -->
+  <line x1="120" y1="270" x2="430" y2="60" stroke="#22d3ee" stroke-width="3"/>
+  <text x="392" y="58" fill="#a6eeff" font-size="11.5" font-weight="700">w·x + b = 0</text>
+  <line x1="170" y1="284" x2="480" y2="74" stroke="#8390a8" stroke-width="1.6" stroke-dasharray="6 5"/>
+  <line x1="70" y1="256" x2="380" y2="46" stroke="#8390a8" stroke-width="1.6" stroke-dasharray="6 5"/>
+  <!-- margin arrow -->
+  <line x1="250" y1="196" x2="300" y2="124" stroke="#fbbf24" stroke-width="1.6"/>
+  <text x="248" y="150" fill="#fbbf24" font-size="12" font-weight="700" text-anchor="end">마진 = 2 / ‖w‖</text>
+  <!-- class + (blue circles) lower-left -->
+  <g fill="#4f86f7">
+    <circle cx="110" cy="210" r="6"/><circle cx="150" cy="250" r="6"/><circle cx="95" cy="170" r="6"/><circle cx="180" cy="280" r="6"/>
+  </g>
+  <!-- support vector (blue) on margin, ringed -->
+  <circle cx="205" cy="232" r="7" fill="#4f86f7"/>
+  <circle cx="205" cy="232" r="12" fill="none" stroke="#34d399" stroke-width="2.5"/>
+  <!-- class - (pink squares) upper-right -->
+  <g fill="#f472b6">
+    <rect x="360" y="96" width="11" height="11"/><rect x="410" y="120" width="11" height="11"/><rect x="440" y="150" width="11" height="11"/><rect x="395" y="180" width="11" height="11"/>
+  </g>
+  <!-- support vectors (pink) ringed -->
+  <rect x="318" y="120" width="12" height="12" fill="#f472b6"/>
+  <circle cx="324" cy="126" r="13" fill="none" stroke="#34d399" stroke-width="2.5"/>
+  <rect x="352" y="156" width="12" height="12" fill="#f472b6"/>
+  <circle cx="358" cy="162" r="13" fill="none" stroke="#34d399" stroke-width="2.5"/>
+  <!-- legend -->
+  <circle cx="470" cy="250" r="6" fill="#34d399" opacity="0.001"/>
+  <circle cx="455" cy="246" r="9" fill="none" stroke="#34d399" stroke-width="2.5"/>
+  <text x="470" y="250" fill="#b6f3da" font-size="11">지지벡터(support vector)</text>
+  <text x="300" y="306" fill="#8390a8" font-size="11.5" text-anchor="middle">마진을 가장 크게 만드는 직선이 최적 · 경계는 지지벡터만으로 결정</text>
+</svg>

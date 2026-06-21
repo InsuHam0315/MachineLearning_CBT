@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>로그인 · 머신러닝 기말 대비</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="login" data-base=".">
+  <header class="site-header" id="app-header"></header>
+
+  <main class="auth-wrap">
+    <div class="card auth-card glass">
+      <div style="text-align:center;margin-bottom:8px">
+        <span class="brand__logo" style="width:54px;height:54px;font-size:1.3rem;margin:0 auto">ML</span>
+      </div>
+      <h1 class="center">로컬 로그인</h1>
+      <p class="muted center" style="margin-top:-4px">서버 인증 없이 이름만으로 시작합니다.<br>모든 학습 기록은 <b>이 브라우저(localStorage)</b>에만 저장됩니다.</p>
+
+      <div id="authStatus" style="margin:18px 0"></div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="nameInput">이름 / 닉네임 <span style="color:var(--red)">*</span></label>
+          <input id="nameInput" type="text" placeholder="예: 함인수" autocomplete="off" required />
+        </div>
+        <div class="form-group">
+          <label for="sidInput">학번 / 별칭 (선택)</label>
+          <input id="sidInput" type="text" placeholder="예: 20251234 (선택 입력)" autocomplete="off" />
+        </div>
+        <div id="loginError" class="callout callout--danger" style="display:none;margin-bottom:12px"></div>
+        <button type="submit" class="btn btn--primary btn--block">로그인하고 시작하기 →</button>
+      </form>
+
+      <p class="muted center" style="font-size:.8rem;margin-top:16px">로그인은 선택 사항입니다. 게스트로도 모든 기능을 사용할 수 있어요.</p>
+      <div class="center" style="margin-top:8px"><a href="index.html">← 대시보드로 돌아가기</a></div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="app-footer"></footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>

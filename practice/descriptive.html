@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>서술형 연습 | 머신러닝 기말 대비</title>
+  <meta name="description" content="정의·비교·공식해석·의사코드 등 서술형 문제를 답안 구조 템플릿과 모범답안으로 연습." />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body data-page="desc" data-base="..">
+  <a class="skip-link" href="#descMount">본문 바로가기</a>
+  <header class="site-header" id="app-header"></header>
+
+  <main class="container">
+    <section style="padding:28px 0 8px">
+      <span class="eyebrow">✍️ 서술형 연습</span>
+      <h1 style="font-size:1.8rem;margin:8px 0 6px">서술형·비교형 답안 연습</h1>
+      <p class="muted">개념 정의, 비교, 공식 의미 해석, 알고리즘 절차·의사코드 작성 문제입니다. <b>핵심 정의 → 비교 기준 → 예시 → 결론 문장</b> 구조로 작성하는 연습을 하세요.</p>
+    </section>
+
+    <div class="callout callout--tip" style="margin-bottom:18px">
+      <div class="co-head">💡 서술형 답안 4단 구조</div>
+      <p><b>① 핵심 정의</b> 무엇인지 한 문장으로 → <b>② 비교 기준</b> 어떤 축으로 나누는지 → <b>③ 예시</b> 구체 사례 → <b>④ 결론 문장</b> 정리 한 줄</p>
+    </div>
+
+    <div class="card" style="margin-bottom:18px">
+      <div class="progress-label"><span>풀이 진행률</span><span id="descProgressLabel">0 / 0</span></div>
+      <div class="progress"><div class="progress__bar" id="descProgress" style="width:0%"></div></div>
+    </div>
+
+    <div class="toolbar" id="descToolbar"></div>
+    <div class="filter-chips" id="descTopics" style="margin-bottom:20px"></div>
+    <div id="descMount"></div>
+  </main>
+
+  <footer class="site-footer" id="app-footer"></footer>
+
+  <script src="../assets/js/common.js"></script>
+  <script src="../data/lecture_coverage.js"></script>
+  <script src="../data/ml_practice.js"></script>
+  <script src="../assets/js/practice.js"></script>
+  <script>
+    ML.practice.mount({
+      mountId: "descMount",
+      data: window.ML_PRACTICE || [],
+      filterTypes: ["서술형", "비교형", "공식해석", "알고리즘절차", "의사코드", "단답정의"],
+      pageKey: "descriptive",
+      toolbarId: "descToolbar",
+      topicChipsId: "descTopics",
+      progressId: "descProgress",
+      progressLabelId: "descProgressLabel"
+    });
+  </script>
+</body>
+</html>

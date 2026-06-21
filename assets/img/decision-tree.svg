@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" font-family="'Pretendard',system-ui,sans-serif">
+  <rect width="600" height="320" rx="16" fill="#0a1322"/>
+  <text x="300" y="32" fill="#e7ecf5" font-size="17" font-weight="800" text-anchor="middle">의사결정 트리: 정보이득이 큰 특징으로 분할</text>
+  <!-- edges -->
+  <g stroke="#42506b" stroke-width="2" fill="none">
+    <path d="M300 74 L170 132"/><path d="M300 74 L430 132"/>
+    <path d="M170 156 L100 214"/><path d="M170 156 L240 214"/>
+    <path d="M430 156 L360 214"/><path d="M430 156 L500 214"/>
+  </g>
+  <!-- edge labels -->
+  <text x="218" y="108" fill="#8390a8" font-size="10">사각형</text>
+  <text x="372" y="108" fill="#8390a8" font-size="10">타원</text>
+  <!-- root -->
+  <rect x="240" y="52" width="120" height="40" rx="9" fill="#11203b" stroke="#4f86f7"/>
+  <text x="300" y="70" fill="#bcd2ff" font-size="12" font-weight="800" text-anchor="middle">몸통 모양?</text>
+  <text x="300" y="85" fill="#8390a8" font-size="9.5" text-anchor="middle">루트 노드 (IG 최대)</text>
+  <!-- level 2 -->
+  <rect x="116" y="132" width="108" height="40" rx="9" fill="#11203b" stroke="#22d3ee"/>
+  <text x="170" y="150" fill="#a6eeff" font-size="11.5" font-weight="700" text-anchor="middle">몸통 색깔?</text>
+  <text x="170" y="164" fill="#8390a8" font-size="9.5" text-anchor="middle">흰색 / 회색</text>
+  <rect x="376" y="132" width="108" height="40" rx="9" fill="#11203b" stroke="#22d3ee"/>
+  <text x="430" y="150" fill="#a6eeff" font-size="11.5" font-weight="700" text-anchor="middle">머리 모양?</text>
+  <text x="430" y="164" fill="#8390a8" font-size="9.5" text-anchor="middle">사각형 / 원</text>
+  <!-- leaves -->
+  <rect x="56" y="214" width="88" height="40" rx="9" fill="#0f1b30" stroke="#34d399"/>
+  <text x="100" y="239" fill="#b6f3da" font-size="12" font-weight="800" text-anchor="middle">Yes</text>
+  <rect x="196" y="214" width="88" height="40" rx="9" fill="#0f1b30" stroke="#f87171"/>
+  <text x="240" y="239" fill="#ffc9c9" font-size="12" font-weight="800" text-anchor="middle">No</text>
+  <rect x="316" y="214" width="88" height="40" rx="9" fill="#0f1b30" stroke="#f87171"/>
+  <text x="360" y="239" fill="#ffc9c9" font-size="12" font-weight="800" text-anchor="middle">No</text>
+  <rect x="456" y="214" width="88" height="40" rx="9" fill="#0f1b30" stroke="#34d399"/>
+  <text x="500" y="239" fill="#b6f3da" font-size="12" font-weight="800" text-anchor="middle">Yes</text>
+  <text x="300" y="290" fill="#8390a8" font-size="11.5" text-anchor="middle">엔트로피를 가장 많이 낮추는(정보이득 IG 최대) 특징을 위에서부터 선택</text>
+</svg>

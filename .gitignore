@@ -1,0 +1,23 @@
+# === 원본 강의자료 (절대 커밋 금지) ===
+시험/
+
+# === 분석용 임시 추출물 ===
+_extract/
+_reference/
+reference/
+tmp/
+temp/
+*.tmp
+
+# === OS / 에디터 ===
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# === 빌드/캐시 ===
+__pycache__/
+*.pyc
+.omc/
+node_modules/
