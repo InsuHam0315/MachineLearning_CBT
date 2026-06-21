@@ -1,7 +1,9 @@
 "use client";
 import Link from "next/link";
+import { useState } from "react";
 import { asset } from "@/lib/config";
 import { FormulaBlock, Prose, SymbolTable, Steps, ProseList, Tags } from "@/components/ui";
+import ZoomImage from "@/components/ZoomImage";
 
 const CH_SVG: Record<string, string> = {
   "lecture-01": "/assets/img/supervised-learning.svg",
@@ -88,9 +90,12 @@ function ExampleItem({ ex }: { ex: any }) {
 export default function ChapterDetail({ chapter, notes, formulas, examples }:
   { chapter: any; notes: any[]; formulas: any[]; examples: any[] }) {
   const num = chapter.id.replace("lecture-", "");
-  const toc: { id: string; label: string }[] = notes.map((n) => ({ id: n.id, label: n.title }));
-  if (formulas.length) toc.push({ id: "sec-formulas", label: "공식 모음" });
-  if (examples.length) toc.push({ id: "sec-examples", label: "계산 예제" });
+  const [tocOpen, setTocOpen] = useState(false);
+  const toc: { id: string; label: string }[] = [
+    ...notes.map((n) => ({ id: n.id, label: n.title })),
+    ...(formulas.length ? [{ id: "sec-formulas", label: "공식 모음" }] : []),
+    ...(examples.length ? [{ id: "sec-examples", label: "계산 예제" }] : []),
+  ];
 
   return (
     <div className="container">
@@ -103,42 +108,53 @@ export default function ChapterDetail({ chapter, notes, formulas, examples }:
         {chapter.fileName}{chapter.slideCount ? " · 슬라이드 " + chapter.slideCount + "쪽" : ""}
       </div>
 
-      <div className="layout" style={{ marginTop: 24 }}>
-        <div>
-          {CH_SVG[chapter.id] ? (
-            <figure className="card" style={{ margin: "0 0 8px", textAlign: "center" }}>
-              <img src={asset(CH_SVG[chapter.id])} alt={chapter.title + " 개념도"} loading="lazy" style={{ width: "100%", maxWidth: 560, borderRadius: 8 }} />
-            </figure>
-          ) : null}
+      <div style={{ marginTop: 24 }}>
+        {CH_SVG[chapter.id] ? (
+          <figure className="card" style={{ margin: "0 0 8px", textAlign: "center" }}>
+            <ZoomImage src={asset(CH_SVG[chapter.id])} alt={chapter.title + " 개념도"} maxWidth={560} />
+            <figcaption className="muted" style={{ fontSize: ".76rem", marginTop: 8 }}>클릭하면 크게 볼 수 있습니다</figcaption>
+          </figure>
+        ) : null}
 
-          {notes.length ? notes.map((n) => <NoteSection key={n.id} n={n} />) : <p className="muted">이 챕터의 개념노트를 준비 중입니다.</p>}
+        {notes.length ? notes.map((n) => <NoteSection key={n.id} n={n} />) : <p className="muted">이 챕터의 개념노트를 준비 중입니다.</p>}
 
-          {formulas.length ? (
-            <section className="note-section" id="sec-formulas">
-              <h3>공식 모음</h3>
-              <p className="muted" style={{ fontSize: ".9rem" }}>원래 식 → 기억할 형태 → 기호 → 의미 → 활용 → 숫자 예. 수식은 KaTeX로 조판됩니다.</p>
-              {formulas.map((f) => <FormulaItem key={f.id} f={f} />)}
-            </section>
-          ) : null}
+        {formulas.length ? (
+          <section className="note-section" id="sec-formulas">
+            <h3>공식 모음</h3>
+            <p className="muted" style={{ fontSize: ".9rem" }}>원래 식 → 기억할 형태 → 기호 → 의미 → 활용 → 숫자 예. 수식은 KaTeX로 조판됩니다.</p>
+            {formulas.map((f) => <FormulaItem key={f.id} f={f} />)}
+          </section>
+        ) : null}
 
-          {examples.length ? (
-            <section className="note-section" id="sec-examples">
-              <h3>계산 예제</h3>
-              {examples.map((ex) => <ExampleItem key={ex.id} ex={ex} />)}
-            </section>
-          ) : null}
+        {examples.length ? (
+          <section className="note-section" id="sec-examples">
+            <h3>계산 예제</h3>
+            {examples.map((ex) => <ExampleItem key={ex.id} ex={ex} />)}
+          </section>
+        ) : null}
 
-          <div className="btn-row" style={{ marginTop: 28 }}>
-            <Link className="btn btn--primary" href="/practice/calculation">관련 문제 풀기</Link>
-            <Link className="btn" href="/notes">다른 챕터 보기</Link>
-          </div>
+        <div className="btn-row" style={{ marginTop: 28 }}>
+          <Link className="btn btn--primary" href="/practice/calculation">관련 문제 풀기</Link>
+          <Link className="btn" href="/notes">다른 챕터 보기</Link>
         </div>
-
-        <aside className="toc">
-          <h4>목차</h4>
-          {toc.map((it) => <a key={it.id} href={"#" + it.id}>{it.label}</a>)}
-        </aside>
       </div>
+
+      {toc.length ? (
+        <>
+          <button className="toc-fab" onClick={() => setTocOpen((o) => !o)} aria-expanded={tocOpen} aria-label="목차 열기/닫기">
+            {tocOpen ? "✕ 목차" : "☰ 목차"}
+          </button>
+          {tocOpen ? (
+            <>
+              <div className="toc-backdrop" onClick={() => setTocOpen(false)} />
+              <nav className="toc-panel" aria-label="목차">
+                <div className="toc-panel-head"><span>목차</span><button onClick={() => setTocOpen(false)} aria-label="닫기">✕</button></div>
+                {toc.map((it) => <a key={it.id} href={"#" + it.id} onClick={() => setTocOpen(false)}>{it.label}</a>)}
+              </nav>
+            </>
+          ) : null}
+        </>
+      ) : null}
     </div>
   );
 }

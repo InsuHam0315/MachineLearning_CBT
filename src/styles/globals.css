@@ -224,8 +224,8 @@ code, pre, kbd, samp, .mono { font-family: var(--font-mono); }
 .field p, .field li { color: var(--text-2); }
 .field ul, .field ol { margin: 6px 0; padding-left: 20px; }
 .prose { white-space: pre-line; color: var(--text-2); }
-.prose-block { max-width: 70ch; }
-.prose-p { margin: 0 0 .85em; line-height: 1.85; color: var(--text-2); font-size: var(--reading); max-width: 70ch; }
+.prose-block { max-width: none; }
+.prose-p { margin: 0 0 .85em; line-height: 1.85; color: var(--text-2); font-size: var(--reading); max-width: none; }
 .prose-p:last-child { margin-bottom: 0; }
 
 /* 공식/수식 */
@@ -241,6 +241,8 @@ code, pre, kbd, samp, .mono { font-family: var(--font-mono); }
 .callout { border: 1px solid var(--border); border-left: 3px solid var(--border-2); background: var(--soft); border-radius: 0 10px 10px 0; padding: 13px 16px; margin: 12px 0; }
 .callout .co-head { font-weight: 700; font-size: .85rem; margin-bottom: 5px; color: var(--text); }
 .callout p, .callout li { color: var(--text-2); font-size: calc(var(--reading) - 1px); margin: 0; }
+.callout .prose-p { margin: 0 0 .7em; }
+.callout .prose-p:last-child { margin-bottom: 0; }
 .callout--tip { border-left-color: var(--text-2); }
 .callout--warn { border-left-color: var(--text-2); background: var(--soft-2); }
 .callout--exam { border-left-color: var(--text); }
@@ -328,6 +330,25 @@ textarea.answer-area:focus, textarea.scratch-area:focus { box-shadow: 0 0 0 3px 
 .back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: .78rem; color: var(--muted); margin-bottom: 14px; }
 .back-link:hover { color: var(--text); text-decoration: none; }
 .page-kicker { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+/* 클릭 확대(라이트박스) */
+.zoomable { cursor: zoom-in; transition: opacity .12s; }
+.zoomable:hover { opacity: .88; }
+.lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(0, 0, 0, 0.74); display: grid; place-items: center; padding: 28px; cursor: zoom-out; animation: lb-fade .14s ease; }
+.lightbox-img { max-width: 94vw; max-height: 90vh; width: auto; height: auto; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.18); cursor: default; }
+.lightbox-close { position: fixed; top: 16px; right: 18px; width: 40px; height: 40px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.28); background: rgba(0, 0, 0, 0.4); color: #fff; font-size: 1rem; cursor: pointer; display: grid; place-items: center; }
+.lightbox-close:hover { background: rgba(0, 0, 0, 0.65); }
+@keyframes lb-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* 토글 목차 (고정 사이드바 대신 플로팅 버튼으로 열고 닫기) */
+.toc-fab { position: fixed; right: 18px; bottom: 18px; z-index: 80; border: 1px solid var(--border-2); background: var(--surface); color: var(--text); border-radius: 999px; padding: 10px 16px; font-family: var(--font-body); font-weight: 600; font-size: .85rem; cursor: pointer; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10); }
+.toc-fab:hover { background: var(--soft); }
+.toc-backdrop { position: fixed; inset: 0; z-index: 79; }
+.toc-panel { position: fixed; right: 18px; bottom: 66px; z-index: 81; width: 256px; max-height: 62vh; overflow: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 8px; box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18); }
+.toc-panel-head { display: flex; align-items: center; justify-content: space-between; padding: 6px 8px 8px; font-family: var(--font-mono); font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.toc-panel-head button { border: none; background: transparent; color: var(--muted); cursor: pointer; font-size: .85rem; }
+.toc-panel a { display: block; padding: 7px 9px; border-radius: 8px; color: var(--text-2); font-size: .85rem; }
+.toc-panel a:hover { background: var(--soft); color: var(--text); text-decoration: none; }
 
 /* ---------------------------------------------------------------- 반응형 */
 @media (max-width: 900px) {

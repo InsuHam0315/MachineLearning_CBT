@@ -8,7 +8,9 @@
 /* 수식은 currentColor → 본문 텍스트색을 그대로 사용 */
 .formula-block .katex, .formula-block .katex-display { color: var(--text); }
 
-.math-inline { display: inline-block; vertical-align: middle; }
+.math-inline { display: inline-block; vertical-align: baseline; }
+/* 본문 인라인 수식은 주변 글자 크기에 맞춰 살짝 작게 */
+.prose-p .math-inline .katex, .reveal-body .math-inline .katex, .prob-statement .math-inline .katex { font-size: 1em; }
 .math-ko { font-family: var(--font-body); font-style: normal; }
 
 /* 변환 실패 시 폴백 */

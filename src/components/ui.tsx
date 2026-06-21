@@ -68,7 +68,11 @@ export function FormulaBlock({ value }: { value?: string }) {
 /* 긴 한국어 텍스트를 문장 단위로 끊고 2~3문장씩 문단으로 묶어 가독성↑ (소수점 보호) */
 function formatProse(value: string): string[] {
   const paras: string[] = [];
-  String(value).split(/\n+/).forEach((chunk) => {
+  // 번호 항목((1),(2)… / ①②…) 앞에서 줄바꿈 → 답안 틀·출제 포인트가 항목별로 끊김
+  const pre = String(value)
+    .replace(/\s*(?=\([1-9]\)\s*[가-힣])/g, "\n")
+    .replace(/\s*(?=[①②③④⑤⑥⑦⑧⑨⑩])/g, "\n");
+  pre.split(/\n+/).forEach((chunk) => {
     const t = chunk.trim();
     if (!t) return;
     let sentences: string[];
@@ -90,11 +94,46 @@ function formatProse(value: string): string[] {
   return paras.length ? paras : [String(value).trim()];
 }
 
+/* 본문 속 인라인 수식(= Σ √ × · 첨자 그리스문자 등)을 감지해 KaTeX로 렌더.
+   한글/일반 영어 단어는 그대로(Pretendard), 변환 실패 시 텍스트로 폴백 → 절대 안 깨짐 */
+const STRONG_MATH = /[=√Σ∑∏∫≤≥≠≈×÷·∂∇‖^→⁰¹²³⁴⁵⁶⁷⁸⁹ⁿ₀₁₂₃₄₅₆₇₈₉ᵢⱼₖₗₘₙαβγδεζηθλμνξπρστφχψωΓΔΘΛΞΠΣΦΨΩ]/;
+
+function renderInline(text: string): React.ReactNode {
+  if (!text) return text;
+  const nodes: React.ReactNode[] = [];
+  const re = /[가-힣]+(?:[\s,·]+[가-힣]+)*/g;
+  let last = 0, k = 0;
+  let m: RegExpExecArray | null;
+  const emitOther = (s: string) => {
+    if (!s) return;
+    if (STRONG_MATH.test(s)) {
+      const lead = (s.match(/^\s+/) || [""])[0];
+      const tail = (s.match(/\s+$/) || [""])[0];
+      const core = s.slice(lead.length, s.length - (tail ? tail.length : 0));
+      const html = core ? katexHtml(mathify(core), false) : null;
+      if (html) {
+        if (lead) nodes.push(lead);
+        nodes.push(<span key={"m" + k++} className="math-inline" dangerouslySetInnerHTML={{ __html: html }} />);
+        if (tail) nodes.push(tail);
+        return;
+      }
+    }
+    nodes.push(<span key={"t" + k++}>{s}</span>);
+  };
+  while ((m = re.exec(text))) {
+    if (m.index > last) emitOther(text.slice(last, m.index));
+    nodes.push(<span key={"k" + k++}>{m[0]}</span>);
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) emitOther(text.slice(last));
+  return nodes;
+}
+
 export function Prose({ value, className }: { value?: string; className?: string }) {
   if (value == null || value === "") return null;
   const paras = formatProse(value);
-  if (paras.length <= 1) return <p className={"prose-p " + (className || "")}>{paras[0]}</p>;
-  return <div className={"prose-block " + (className || "")}>{paras.map((p, i) => <p className="prose-p" key={i}>{p}</p>)}</div>;
+  if (paras.length <= 1) return <p className={"prose-p " + (className || "")}>{renderInline(paras[0])}</p>;
+  return <div className={"prose-block " + (className || "")}>{paras.map((p, i) => <p className="prose-p" key={i}>{renderInline(p)}</p>)}</div>;
 }
 
 /* 기호 설명표 (기호 칸은 실제 수식으로) */
