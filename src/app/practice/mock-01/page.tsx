@@ -13,10 +13,10 @@ export default function Mock01Page() {
         <p className="muted">교수님 출제 스타일에 맞춘 서술형·계산형 10문항입니다. 실제 시험처럼 답안을 먼저 작성한 뒤 모범답안·채점 기준으로 스스로 채점하세요.</p>
       </section>
       <div className="card" style={{ marginBottom: 18 }}>
-        <div className="field-label" style={{ color: "var(--cyan)" }}>📋 구성</div>
+        <div className="field-label">📋 구성</div>
         <div className="tag-row">
-          <span className="badge badge--blue">계산형 3</span><span className="badge badge--green">서술형 3</span>
-          <span className="badge badge--violet">공식해석 2</span><span className="badge badge--cyan">의사코드 1</span>
+          <span className="badge">계산형 3</span><span className="badge badge--green">서술형 3</span>
+          <span className="badge">공식해석 2</span><span className="badge">의사코드 1</span>
           <span className="badge badge--amber">복잡도/절차 1</span>
         </div>
       </div>

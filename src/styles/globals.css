@@ -18,6 +18,7 @@
   --text: #e7ecf5;
   --text-soft: #b6c0d4;
   --text-mut: #8390a8;
+  --label: #8ea4c2;
 
   /* 액센트 */
   --blue: #4f86f7;
@@ -162,6 +163,7 @@ code, kbd { font-family: var(--mono); }
   font-size: .72rem; font-weight: 700; border: 1px solid var(--border-strong);
   background: var(--surface-2); color: var(--text-soft); letter-spacing: .01em;
 }
+.badge--soft { background: var(--surface); color: var(--text-mut); border-color: var(--border); font-weight: 600; }
 .badge--blue { background: rgba(79,134,247,.16); border-color: rgba(79,134,247,.4); color: #bcd2ff; }
 .badge--cyan { background: rgba(34,211,238,.14); border-color: rgba(34,211,238,.4); color: #a6eeff; }
 .badge--violet { background: rgba(167,139,250,.16); border-color: rgba(167,139,250,.42); color: #dccfff; }
@@ -242,14 +244,17 @@ code, kbd { font-family: var(--mono); }
 .note-body { padding: 4px 20px 22px; border-top: 1px solid var(--border); }
 
 .field { margin: 16px 0; }
-.field > .field-label {
+.field-label, .field > .field-label {
   display: inline-flex; align-items: center; gap: 7px; font-size: .74rem; font-weight: 800; letter-spacing: .06em;
-  text-transform: uppercase; color: var(--cyan); margin-bottom: 6px;
+  text-transform: uppercase; color: var(--label); margin-bottom: 6px;
 }
 .field p, .field li { color: var(--text-soft); }
 .field ul, .field ol { margin: 6px 0; padding-left: 20px; }
 .field li { margin-bottom: 4px; }
 .prose { white-space: pre-line; color: var(--text-soft); }
+.prose-block { max-width: 74ch; }
+.prose-p { margin: 0 0 .8em; line-height: 1.85; color: var(--text-soft); max-width: 74ch; }
+.prose-p:last-child { margin-bottom: 0; }
 
 /* ---------------------------------------------------------------- 공식/수식 블록 */
 .formula-block {
@@ -272,8 +277,8 @@ code, kbd { font-family: var(--mono); }
 .callout--tip .co-head { color: var(--green); }
 .callout--warn { background: rgba(251,191,36,.08); border-color: rgba(251,191,36,.32); }
 .callout--warn .co-head { color: var(--amber); }
-.callout--exam { background: rgba(167,139,250,.09); border-color: rgba(167,139,250,.34); }
-.callout--exam .co-head { color: var(--violet); }
+.callout--exam { background: rgba(34,211,238,.07); border-color: rgba(34,211,238,.30); }
+.callout--exam .co-head { color: var(--cyan); }
 .callout--danger { background: rgba(248,113,113,.08); border-color: rgba(248,113,113,.32); }
 .callout--danger .co-head { color: var(--red); }
 
@@ -331,7 +336,7 @@ textarea.answer-area:focus, textarea.scratch-area:focus { box-shadow: var(--ring
 .reveal-body { padding: 14px 16px; }
 .reveal--answer .reveal-head { color: var(--green); }
 .reveal--steps .reveal-head { color: var(--cyan); }
-.reveal--rubric .reveal-head { color: var(--violet); }
+.reveal--rubric .reveal-head { color: var(--cyan); }
 .reveal--mistake .reveal-head { color: var(--amber); }
 
 .solution-steps { counter-reset: step; list-style: none; padding: 0; margin: 0; }

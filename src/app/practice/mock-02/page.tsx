@@ -13,10 +13,10 @@ export default function Mock02Page() {
         <p className="muted">1회와 겹치지 않는 소재(행렬식·정보이득·공분산·정규화·커널·군집)로 구성한 10문항입니다. 시간을 정해 실전처럼 풀어 보세요.</p>
       </section>
       <div className="card" style={{ marginBottom: 18 }}>
-        <div className="field-label" style={{ color: "var(--cyan)" }}>📋 구성</div>
+        <div className="field-label">📋 구성</div>
         <div className="tag-row">
-          <span className="badge badge--blue">계산형 3</span><span className="badge badge--green">서술형 3</span>
-          <span className="badge badge--violet">공식해석 2</span><span className="badge badge--cyan">의사코드 1</span>
+          <span className="badge">계산형 3</span><span className="badge badge--green">서술형 3</span>
+          <span className="badge">공식해석 2</span><span className="badge">의사코드 1</span>
           <span className="badge badge--amber">복잡도/군집 1</span>
         </div>
       </div>

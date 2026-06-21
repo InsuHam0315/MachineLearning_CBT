@@ -74,15 +74,15 @@ function ProblemCard({ p, idx, pageKey, onChange }: { p: any; idx: number; pageK
       <div className="prob-head">
         <span className="prob-id">{p.id}</span>
         <span className="prob-topic">Q{idx + 1}. {p.topic || "문제"}</span>
-        {p.type ? <span className="badge badge--blue">{p.type}</span> : null}
+        {p.type ? <span className="badge">{p.type}</span> : null}
         {p.difficulty ? <DiffDot d={p.difficulty} /> : null}
-        {chTitle ? <span className="badge badge--violet">{chTitle}</span> : null}
+        {chTitle ? <span className="badge">{chTitle}</span> : null}
       </div>
       <div className="prob-body">
         <div className="prob-statement"><Prose value={p.problem} /></div>
 
         {p.answerFormat ? (
-          <div className="callout"><div className="co-head">📝 답안 형식</div><p className="prose">{p.answerFormat}</p></div>
+          <div className="callout"><div className="co-head">📝 답안 형식</div><Prose value={p.answerFormat} /></div>
         ) : null}
         {p.keyFormula ? (<><div className="field-mini-label">핵심 공식</div><FormulaBlock value={p.keyFormula} /></>) : null}
 
@@ -107,11 +107,11 @@ function ProblemCard({ p, idx, pageKey, onChange }: { p: any; idx: number; pageK
             <div className="reveal-body">
               {isDescriptive && p.answerStructure && p.answerStructure.length ? (
                 <div className="answer-template">
-                  <div className="co-head" style={{ color: "var(--blue)", marginBottom: 6 }}>서술형 답안 구조</div>
+                  <div className="co-head" style={{ marginBottom: 6 }}>서술형 답안 구조</div>
                   {p.answerStructure.map((s: string, i: number) => <div className="at-step" key={i}><b>{s}</b></div>)}
                 </div>
               ) : null}
-              <div className="prose">{p.modelAnswer}</div>
+              <Prose value={p.modelAnswer} />
             </div>
           </div>
         ) : null}

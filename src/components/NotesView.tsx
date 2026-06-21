@@ -29,7 +29,7 @@ function Field({ label, color, children }: { label: string; color?: string; chil
   if (!children) return null;
   return (
     <div className="field">
-      <span className="field-label" style={color ? { color } : undefined}>{label}</span>
+      <span className="field-label">{label}</span>
       {children}
     </div>
   );
@@ -40,23 +40,23 @@ function NoteCard({ n }: { n: any }) {
     <details className="card note-card">
       <summary>
         <span className="nc-title">{n.title}</span>
-        {n.importance === "high" ? <span className="badge badge--red">핵심</span> : <span className="badge badge--blue">보충</span>}
-        {n.examPoint ? <span className="badge badge--violet">시험출제</span> : null}
+        {n.importance === "high" ? <span className="badge badge--cyan">핵심</span> : <span className="badge">보충</span>}
+        {n.examPoint ? <span className="badge">시험출제</span> : null}
         <span className="nc-chev">▸</span>
       </summary>
       <div className="note-body">
-        {n.beginnerExplanation ? <Field label="초보자를 위한 설명" color="var(--cyan)"><p className="prose">{n.beginnerExplanation}</p></Field> : null}
-        {n.intuition ? <Field label="직관적으로 이해하기" color="var(--cyan)"><p className="prose">{n.intuition}</p></Field> : null}
-        {n.formalDefinition ? <Field label="형식적 정의" color="var(--blue)"><p className="prose">{n.formalDefinition}</p></Field> : null}
+        {n.beginnerExplanation ? <Field label="초보자를 위한 설명" color="var(--cyan)"><Prose value={n.beginnerExplanation} /></Field> : null}
+        {n.intuition ? <Field label="직관적으로 이해하기" color="var(--cyan)"><Prose value={n.intuition} /></Field> : null}
+        {n.formalDefinition ? <Field label="형식적 정의" color="var(--blue)"><Prose value={n.formalDefinition} /></Field> : null}
         {n.formulaSummary ? <Field label="핵심 공식" color="var(--cyan)"><FormulaBlock value={n.formulaSummary} /></Field> : null}
         {n.symbolExplanation && n.symbolExplanation.length ? <Field label="기호 설명" color="var(--cyan)"><SymbolTable items={n.symbolExplanation} /></Field> : null}
         {n.stepByStepLogic && n.stepByStepLogic.length ? <Field label="논리 전개 (단계별)" color="var(--blue)"><Steps items={n.stepByStepLogic} /></Field> : null}
-        {n.concreteExample ? <Field label="구체적 예시" color="var(--green)"><p className="prose">{n.concreteExample}</p></Field> : null}
-        {n.solvedExample ? <Field label="풀이 예시" color="var(--green)"><div className="callout"><p className="prose">{n.solvedExample}</p></div></Field> : null}
-        {n.descriptiveAnswerTemplate ? <Field label="서술형 답안 작성 틀" color="var(--blue)"><div className="answer-template"><p className="prose">{n.descriptiveAnswerTemplate}</p></div></Field> : null}
-        {n.examPoint ? <div className="callout callout--exam"><div className="co-head">🎯 시험 출제 포인트</div><p className="prose">{n.examPoint}</p></div> : null}
+        {n.concreteExample ? <Field label="구체적 예시" color="var(--green)"><Prose value={n.concreteExample} /></Field> : null}
+        {n.solvedExample ? <Field label="풀이 예시" color="var(--green)"><div className="callout"><Prose value={n.solvedExample} /></div></Field> : null}
+        {n.descriptiveAnswerTemplate ? <Field label="서술형 답안 작성 틀" color="var(--blue)"><div className="answer-template"><Prose value={n.descriptiveAnswerTemplate} /></div></Field> : null}
+        {n.examPoint ? <div className="callout callout--exam"><div className="co-head">🎯 시험 출제 포인트</div><Prose value={n.examPoint} /></div> : null}
         {n.commonMistakes && n.commonMistakes.length ? <div className="callout callout--warn"><div className="co-head">⚠ 자주 하는 실수</div><ProseList items={n.commonMistakes} /></div> : null}
-        {n.quickMemoryTip ? <div className="callout callout--tip"><div className="co-head">💡 암기 팁</div><p className="prose">{n.quickMemoryTip}</p></div> : null}
+        {n.quickMemoryTip ? <div className="callout callout--tip"><div className="co-head">💡 암기 팁</div><Prose value={n.quickMemoryTip} /></div> : null}
         {n.relatedConcepts && n.relatedConcepts.length ? <Field label="관련 개념" color="var(--violet)"><Tags items={n.relatedConcepts} variant="violet" /></Field> : null}
         {n.practiceLinks && n.practiceLinks.length ? (
           <div className="btn-row" style={{ marginTop: 12 }}>
@@ -74,16 +74,16 @@ function FormulaCard({ f }: { f: any }) {
     <details className="card note-card">
       <summary>
         <span className="nc-title">∑ {f.title}</span>
-        <span className="badge badge--violet">{chapterTitle(f.chapterId)}</span>
+        <span className="badge">{chapterTitle(f.chapterId)}</span>
         <span className="nc-chev">▸</span>
       </summary>
       <div className="note-body">
         {f.original ? <Field label="원래 식" color="var(--text-mut)"><FormulaBlock value={f.original} /></Field> : null}
         <Field label="최종적으로 기억할 형태" color="var(--cyan)"><FormulaBlock value={f.memorize || f.original} /></Field>
         {f.symbols && f.symbols.length ? <Field label="기호 설명" color="var(--cyan)"><SymbolTable items={f.symbols} /></Field> : null}
-        {f.meaning ? <Field label="의미" color="var(--blue)"><p className="prose">{f.meaning}</p></Field> : null}
-        {f.whenToUse ? <Field label="언제 쓰는가" color="var(--green)"><p className="prose">{f.whenToUse}</p></Field> : null}
-        {f.numericExample ? <Field label="짧은 숫자 예" color="var(--green)"><div className="callout"><p className="prose">{f.numericExample}</p></div></Field> : null}
+        {f.meaning ? <Field label="의미" color="var(--blue)"><Prose value={f.meaning} /></Field> : null}
+        {f.whenToUse ? <Field label="언제 쓰는가" color="var(--green)"><Prose value={f.whenToUse} /></Field> : null}
+        {f.numericExample ? <Field label="짧은 숫자 예" color="var(--green)"><div className="callout"><Prose value={f.numericExample} /></div></Field> : null}
         {f.derivation ? <details className="callout"><summary className="co-head" style={{ cursor: "pointer", color: "var(--text-mut)" }}>필요한 만큼만 보는 전개</summary><p className="prose" style={{ marginTop: 8 }}>{f.derivation}</p></details> : null}
         {f.tags && f.tags.length ? <div style={{ marginTop: 12 }}><Tags items={f.tags} variant="violet" /></div> : null}
       </div>
@@ -96,16 +96,16 @@ function ExampleCard({ ex }: { ex: any }) {
     <details className="card note-card">
       <summary>
         <span className="nc-title">✎ {ex.title}</span>
-        <span className="badge badge--cyan">{ex.topic || "예제"}</span>
-        <span className="badge badge--violet">{chapterTitle(ex.chapterId)}</span>
+        <span className="badge">{ex.topic || "예제"}</span>
+        <span className="badge">{chapterTitle(ex.chapterId)}</span>
         <span className="nc-chev">▸</span>
       </summary>
       <div className="note-body">
-        <Field label="문제" color="var(--blue)"><p className="prose">{ex.problem}</p></Field>
+        <Field label="문제" color="var(--blue)"><Prose value={ex.problem} /></Field>
         {ex.given ? <Field label="주어진 값" color="var(--text-mut)"><FormulaBlock value={ex.given} /></Field> : null}
         <Field label="풀이" color="var(--cyan)"><Steps items={ex.steps} /></Field>
-        {ex.answer ? <div className="callout callout--tip"><div className="co-head">✓ 최종 답</div><p className="prose">{ex.answer}</p></div> : null}
-        {ex.takeaway ? <div className="callout callout--exam"><div className="co-head">🎯 핵심 포인트</div><p className="prose">{ex.takeaway}</p></div> : null}
+        {ex.answer ? <div className="callout callout--tip"><div className="co-head">✓ 최종 답</div><Prose value={ex.answer} /></div> : null}
+        {ex.takeaway ? <div className="callout callout--exam"><div className="co-head">🎯 핵심 포인트</div><Prose value={ex.takeaway} /></div> : null}
         {ex.tags && ex.tags.length ? <div style={{ marginTop: 12 }}><Tags items={ex.tags} variant="cyan" /></div> : null}
       </div>
     </details>

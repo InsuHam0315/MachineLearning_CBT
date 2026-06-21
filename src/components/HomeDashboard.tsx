@@ -36,7 +36,7 @@ export function HomeSummary() {
   return (
     <div className="grid grid--2">
       <div className="card">
-        <div className="field-label" style={{ color: "var(--cyan)" }}>📈 최근 학습 요약</div>
+        <div className="field-label">📈 최근 학습 요약</div>
         {!s.totalChecks ? <p className="muted">아직 학습 기록이 없습니다. 연습 문제를 풀고 자가 점검을 눌러보세요.</p> : (
           <div className="stat-row" style={{ marginTop: 6 }}>
             <div className="stat"><div className="num">{s.totalChecks}</div><div className="lbl">자가점검 횟수</div></div>
@@ -48,7 +48,7 @@ export function HomeSummary() {
         <div className="btn-row" style={{ marginTop: 14 }}><Link className="btn btn--sm" href="/stats/study-record">학습기록 상세 →</Link></div>
       </div>
       <div className="card">
-        <div className="field-label" style={{ color: "var(--amber)" }}>🎯 약점 토픽</div>
+        <div className="field-label">🎯 약점 토픽</div>
         {!s.weakTopics.length ? <p className="muted">약점으로 표시된 토픽이 없습니다. “애매함/틀림”으로 점검하면 여기에 모입니다.</p> : (
           <>
             <div className="tag-row" style={{ marginTop: 4 }}>{s.weakTopics.slice(0, 6).map((t: any) => <span className="badge badge--amber" key={t.topic}>{t.topic} · {(t.bad + t.meh)}회</span>)}</div>

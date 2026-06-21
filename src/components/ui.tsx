@@ -65,10 +65,36 @@ export function FormulaBlock({ value }: { value?: string }) {
   );
 }
 
-/* 줄바꿈 보존 일반 텍스트 */
+/* 긴 한국어 텍스트를 문장 단위로 끊고 2~3문장씩 문단으로 묶어 가독성↑ (소수점 보호) */
+function formatProse(value: string): string[] {
+  const paras: string[] = [];
+  String(value).split(/\n+/).forEach((chunk) => {
+    const t = chunk.trim();
+    if (!t) return;
+    let sentences: string[];
+    try {
+      sentences = t.split(/(?<=[가-힣\)\]%][.?!])\s+/);
+    } catch {
+      sentences = [t]; // 구형 브라우저(lookbehind 미지원) 폴백
+    }
+    sentences = sentences.map((s) => s.trim()).filter(Boolean);
+    let buf: string[] = [];
+    let len = 0;
+    const flush = () => { if (buf.length) { paras.push(buf.join(" ")); buf = []; len = 0; } };
+    for (const s of sentences) {
+      buf.push(s); len += s.length;
+      if (buf.length >= 3 || (buf.length >= 2 && len >= 120)) flush();
+    }
+    flush();
+  });
+  return paras.length ? paras : [String(value).trim()];
+}
+
 export function Prose({ value, className }: { value?: string; className?: string }) {
-  if (value == null) return null;
-  return <span className={"prose " + (className || "")}>{value}</span>;
+  if (value == null || value === "") return null;
+  const paras = formatProse(value);
+  if (paras.length <= 1) return <p className={"prose-p " + (className || "")}>{paras[0]}</p>;
+  return <div className={"prose-block " + (className || "")}>{paras.map((p, i) => <p className="prose-p" key={i}>{p}</p>)}</div>;
 }
 
 /* 기호 설명표 (기호 칸은 실제 수식으로) */
@@ -126,12 +152,11 @@ export function Rubric({ items }: { items?: string[] }) {
   );
 }
 
-export function Tags({ items, variant }: { items?: string[]; variant?: string }) {
+export function Tags({ items }: { items?: string[]; variant?: string }) {
   if (!items || !items.length) return null;
-  const cls = "badge" + (variant ? " badge--" + variant : "");
   return (
     <span className="tag-row">
-      {items.map((t, i) => <span className={cls} key={i}>#{t}</span>)}
+      {items.map((t, i) => <span className="badge badge--soft" key={i}>#{t}</span>)}
     </span>
   );
 }

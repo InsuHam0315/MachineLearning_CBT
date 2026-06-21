@@ -55,7 +55,7 @@ export default function Home() {
 
       <section className="section">
         <div className="card">
-          <div className="field-label" style={{ color: "var(--cyan)" }}>🧭 추천 학습 흐름</div>
+          <div className="field-label">🧭 추천 학습 흐름</div>
           <div className="grid grid--4" style={{ marginTop: 8 }}>
             {FLOW.map(([t, d]) => <div className="panel" key={t}><b>{t}</b><p className="muted" style={{ margin: "6px 0 0" }}>{d}</p></div>)}
           </div>

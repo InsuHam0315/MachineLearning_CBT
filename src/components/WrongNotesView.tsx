@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { KEYS, getItem, setItem, unique } from "@/lib/storage";
-import { FormulaBlock, Steps, Rubric, ProseList, Tags, DiffDot } from "@/components/ui";
+import { FormulaBlock, Prose, Steps, Rubric, ProseList, Tags, DiffDot } from "@/components/ui";
 
 const PAGE_URL: Record<string, string> = {
   "calculation": "/practice/calculation",
@@ -72,22 +72,22 @@ export default function WrongNotesView() {
               <div className="prob-head">
                 <span className="prob-id">{w.id}</span>
                 <span className="prob-topic">{w.topic || "문제"}</span>
-                {w.type ? <span className="badge badge--blue">{w.type}</span> : null}
+                {w.type ? <span className="badge">{w.type}</span> : null}
                 {w.difficulty ? <DiffDot d={w.difficulty} /> : null}
-                {w.chapterTitle ? <span className="badge badge--violet">{w.chapterTitle}</span> : null}
+                {w.chapterTitle ? <span className="badge">{w.chapterTitle}</span> : null}
                 <span className="muted" style={{ marginLeft: "auto", fontSize: ".74rem" }}>저장 {fmt(w.savedAt)}</span>
               </div>
               <div className="prob-body">
-                <div className="prob-statement prose">{w.problem}</div>
+                <div className="prob-statement"><Prose value={w.problem} /></div>
                 {w.keyFormula ? <><div className="field-mini-label">핵심 공식</div><FormulaBlock value={w.keyFormula} /></> : null}
-                {w.userAnswer ? <><div className="field-mini-label">내가 작성한 답안</div><div className="callout"><p className="prose">{w.userAnswer}</p></div></>
+                {w.userAnswer ? <><div className="field-mini-label">내가 작성한 답안</div><div className="callout"><Prose value={w.userAnswer} /></div></>
                   : <div className="callout callout--warn"><p>작성한 답안이 없습니다. 다시 풀어보며 답안을 작성해 보세요.</p></div>}
 
                 <details className="reveal reveal--answer" style={{ marginTop: 12 }}>
                   <summary className="reveal-head" style={{ cursor: "pointer" }}>✓ 모범답안 보기</summary>
                   <div className="reveal-body">
                     {w.answerStructure && w.answerStructure.length ? <div className="answer-template">{w.answerStructure.map((s: string, i: number) => <div className="at-step" key={i}><b>{s}</b></div>)}</div> : null}
-                    <div className="prose">{w.modelAnswer}</div>
+                    <Prose value={w.modelAnswer} />
                   </div>
                 </details>
                 <details className="reveal reveal--steps" style={{ marginTop: 10 }}>
