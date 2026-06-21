@@ -18,7 +18,7 @@
   --text: #e7ecf5;
   --text-soft: #b6c0d4;
   --text-mut: #8390a8;
-  --label: #8ea4c2;
+  --label: #45cfe6;
 
   /* 액센트 */
   --blue: #4f86f7;
@@ -246,8 +246,9 @@ code, kbd { font-family: var(--mono); }
 .field { margin: 16px 0; }
 .field-label, .field > .field-label {
   display: inline-flex; align-items: center; gap: 7px; font-size: .74rem; font-weight: 800; letter-spacing: .06em;
-  text-transform: uppercase; color: var(--label); margin-bottom: 6px;
+  text-transform: uppercase; color: var(--label); margin-bottom: 7px;
 }
+.note-body .field-label::before { content: ""; display: inline-block; width: 3px; height: 13px; border-radius: 2px; background: var(--label); flex: none; }
 .field p, .field li { color: var(--text-soft); }
 .field ul, .field ol { margin: 6px 0; padding-left: 20px; }
 .field li { margin-bottom: 4px; }
