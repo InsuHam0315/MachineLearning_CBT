@@ -13,8 +13,8 @@
 - [x] 8. SVG 다이어그램 8종
 - [x] 9. HTML 페이지 9종
 - [x] 10. 검증 스크립트 2종 + 실행 + 통과
-- [ ] 11. git init / commit / push
-- [ ] 12. 한국어 최종 보고
+- [x] 11. git init / commit (2 커밋) — push는 인증 문제로 보류
+- [x] 12. 한국어 최종 보고
 
 ## 강의 파일 점검 (7/7 추출·반영 완료)
 | ID | 파일 | 슬라이드 | 반영 |
@@ -51,12 +51,17 @@
 - 로컬 HTTP 서빙: 주요 9개 URL 모두 200
 
 ## Git 상태
-- repo: 미초기화 → 다음 단계에서 init/commit/push
-- remote 예정: https://github.com/InsuHam0315/MachineLearning_CBT.git
-- 커밋/푸시: 진행 예정 (시험/ 원본은 .gitignore로 제외)
+- repo: 초기화됨, branch=main, 커밋 2개 (4a6d1c3, 442c9ca), 작업트리 clean
+- remote: origin = https://github.com/InsuHam0315/MachineLearning_CBT.git
+- 시험/ 원본: 커밋 안 됨(.gitignore) — 확인 완료
+- push: **보류**. HTTP 403 — 이 PC의 저장된 GitHub 자격증명이 'sikheon' 계정이라 InsuHam0315 저장소에 쓰기 권한 없음.
 
-## 다음 동작 (Resume)
-→ git init → remote 설정 → `시험/` 제외 확인 → commit → push → 한국어 보고.
+## 다음 동작 (Resume) — 푸시만 남음
+InsuHam0315(또는 쓰기권한 계정)로 인증 후:
+```
+git -C "C:\Users\HS\H\머신러닝시험" push -u origin main
+```
+자격증명 교체 방법은 최종 보고의 8번 항목 참조.
 
 ## 안전
 - `시험/` 원본은 수정/삭제/이동/커밋하지 않음. `_extract/`(분석 임시물)도 gitignore.
